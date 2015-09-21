@@ -1,8 +1,11 @@
 #ifndef _LINUX_FS_H
 #define _LINUX_FS_H
 
-// @daniel, backport 3.13-1
-u8 *hid_alloc_report_buf(struct hid_report *report, gfp_t flags);
+/* @daniel, backport form 3.13-1
+ * some versions don't have this and thus don't
+ * include it from the original fs.h
+ */
+//#include <linux/uidgid.h>
 // @
 
 /*
