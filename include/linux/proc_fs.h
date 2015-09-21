@@ -290,4 +290,12 @@ static inline struct net *PDE_NET(struct proc_dir_entry *pde)
 	return pde->parent->data;
 }
 
+// @daniel, backport 3.31-1
+static inline struct user_namespace *seq_user_ns(struct seq_file *seq)
+{
+	extern struct user_namespace init_user_ns;
+	return &init_user_ns;
+}
+// @
+
 #endif /* _LINUX_PROC_FS_H */

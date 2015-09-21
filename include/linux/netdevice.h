@@ -2682,6 +2682,26 @@ static inline bool netif_supports_nofcs(struct net_device *dev)
 
 extern struct pernet_operations __net_initdata loopback_net_ops;
 
+/* @daniel, backprot 3.13-1
+   XXX: this can probably just go upstream ! */
+#define mc_addr(ha) (ha)->addr
+static inline void netdev_attach_ops(struct net_device *dev,
+		       const struct net_device_ops *ops)
+{
+	dev->netdev_ops = ops;
+}
+
+/* XXX: this can probably just go upstream! */
+static inline int ndo_do_ioctl(struct net_device *dev,
+			       struct ifreq *ifr,
+			       int cmd)
+{
+	if (dev->netdev_ops && dev->netdev_ops->ndo_do_ioctl)
+		return dev->netdev_ops->ndo_do_ioctl(dev, ifr, cmd);
+	return -EOPNOTSUPP;
+}
+// @
+
 /* Logging, debugging and troubleshooting/diagnostic helpers. */
 
 /* netdev_printk helpers, similar to dev_printk */

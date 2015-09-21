@@ -949,6 +949,10 @@ do {									\
 #define hid_dbg(hid, fmt, arg...)			\
 	dev_dbg(&(hid)->dev, fmt, ##arg)
 
+// @daniel, backport 3.13-1
+u8 *hid_alloc_report_buf(struct hid_report *report, gfp_t flags);
+// @
+
 #endif /* __KERNEL__ */
 
 #endif

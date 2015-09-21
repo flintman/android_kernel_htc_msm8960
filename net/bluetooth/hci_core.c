@@ -2028,8 +2028,27 @@ void *hci_sent_cmd_data(struct hci_dev *hdev, __u16 opcode)
 {
 	struct hci_command_hdr *hdr;
 
+	// @daniel, from bluetooth_mgmt SS_BLUETOOTH(is80.hwang) 2012.05.16
+	// Check null pointer and opcode
+	#if defined(CONFIG_BT_CSR8811)
+	if (hdev == NULL) {
+		BT_ERR("hci_sent_cmd_opcode:: hdev=NULL, opcode=0x%x", opcode);
+		return NULL;
+	}
+	// @
+
 	if (!hdev->sent_cmd)
 		return NULL;
+
+	// @daniel, from bluetooth_mgmt SS_BLUETOOTH(is80.hwang) 2012.05.16
+	// Check null pointer and opcode
+	#if defined(CONFIG_BT_CSR8811)
+	if (hdev == NULL) {
+		BT_ERR("hci_sent_cmd_opcode:: hdev=NULL, opcode=0x%x", opcode);
+		return NULL;
+	}
+	// @
+
 
 	hdr = (void *) hdev->sent_cmd->data;
 

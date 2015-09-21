@@ -171,6 +171,9 @@ static inline unsigned compare_ether_addr(const u8 *addr1, const u8 *addr2)
 	return ((a[0] ^ b[0]) | (a[1] ^ b[1]) | (a[2] ^ b[2])) != 0;
 }
 
+// @ daniel, backport 3.31-1
+extern int simple_open(struct inode *inode, struct file *file);
+
 static inline unsigned long zap_last_2bytes(unsigned long value)
 {
 #ifdef __BIG_ENDIAN

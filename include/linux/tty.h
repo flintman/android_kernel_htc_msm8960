@@ -668,6 +668,11 @@ do {									\
 	finish_wait(&wq, &__wait);					\
 } while (0)
 
+// @daniel, backport 3.13-1
+#define tty_port_register_device(port, driver, index, device) \
+	tty_register_device(driver, index, device)
+// @
+
 
 #endif /* __KERNEL__ */
 #endif

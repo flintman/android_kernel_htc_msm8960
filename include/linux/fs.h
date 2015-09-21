@@ -1,6 +1,10 @@
 #ifndef _LINUX_FS_H
 #define _LINUX_FS_H
 
+// @daniel, backport 3.13-1
+u8 *hid_alloc_report_buf(struct hid_report *report, gfp_t flags);
+// @
+
 /*
  * This file has definitions for some important file table
  * structures etc.
@@ -2688,6 +2692,9 @@ static inline void inode_has_no_xattr(struct inode *inode)
 	if (!is_sxid(inode->i_mode) && (inode->i_sb->s_flags & MS_NOSEC))
 		inode->i_flags |= S_NOSEC;
 }
+
+// @ daniel, backport 3.31-1
+extern int simple_open(struct inode *inode, struct file *file);
 
 #endif /* __KERNEL__ */
 #endif /* _LINUX_FS_H */
