@@ -1967,6 +1967,27 @@ static irqreturn_t msm_hs_isr(int irq, void *dev)
 	return IRQ_HANDLED;
 }
 
+/* The following two functions provide interfaces to get the underlying
+ * port structure (struct uart_port or struct msm_hs_port) given
+ * the port index. msm_hs_get_uart port is called by clients.
+ * The function msm_hs_get_hs_port is for internal use
+ */
+
+struct uart_port *msm_hs_get_uart_port(int port_index)
+{
+	struct uart_state *state = msm_hs_driver.state + port_index;
+
+	/* The uart_driver structure stores the states in an array.
+	 * Thus the corresponding offset from the drv->state returns
+	 * the state for the uart_port that is requested
+	 */
+	if (port_index == state->uart_port->line)
+		return state->uart_port;
+
+	return NULL;
+}
+EXPORT_SYMBOL(msm_hs_get_uart_port);
+
 /* request to turn off uart clock once pending TX is flushed */
 void msm_hs_request_clock_off(struct uart_port *uport) {
 	unsigned long flags;

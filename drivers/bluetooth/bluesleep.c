@@ -52,7 +52,7 @@
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
 #include <linux/serial_core.h>
-#include <linux/platform_data/msm_serial_hs.h>
+#include <mach/msm_serial_hs.h>
 
 #include <net/bluetooth/bluetooth.h>
 #include <net/bluetooth/hci_core.h> /* event notifications */
@@ -717,7 +717,7 @@ static int bluesleep_proc_show(struct seq_file *m, void *v)
 static ssize_t bluesleep_proc_write(struct file *file, const char *buf,
 	size_t count, loff_t *pos)
 {
-	void *data = PDE_DATA(file_inode(file));
+	void *data = PDE(file->f_path.dentry->d_inode)->data;
 	char lbuf[32];
 
 	if (count >= sizeof(lbuf))
