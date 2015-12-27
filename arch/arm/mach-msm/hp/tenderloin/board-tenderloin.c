@@ -3317,20 +3317,14 @@ static void __init register_i2c_devices(void)
 
 #ifdef CONFIG_SERIAL_MSM_HS
 
-static int configure_uart_gpios(int on)
-{
-	int ret = 0;
-	int uart_gpios[] = {53, 54, 55, 56};
-
-	ret = configure_gpiomux_gpios(on, uart_gpios, ARRAY_SIZE(uart_gpios));
-
-	return ret;
-}
-
 static struct msm_serial_hs_platform_data msm_uart_dm1_pdata = {
 	.inject_rx_on_wakeup = 1,
 	.rx_to_inject = 0xFD,
-    .gpio_config = configure_uart_gpios,
+	.config_gpio		= 4,
+	.uart_tx_gpio		= 53,
+	.uart_rx_gpio		= 54,
+	.uart_cts_gpio		= 55,
+	.uart_rfr_gpio		= 56,
 };
 #endif
 
