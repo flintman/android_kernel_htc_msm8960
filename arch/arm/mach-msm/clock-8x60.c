@@ -309,7 +309,7 @@ static DEFINE_VDD_CLASS(vdd_dig, set_vdd_dig, VDD_DIG_NUM);
 	},					\
 	.num_fmax = VDD_DIG_NUM
 
-DEFINE_CLK_RPM_BRANCH(pxo_clk, pxo_a_clk, PXO, 24576000);
+DEFINE_CLK_RPM_BRANCH(pxo_clk, pxo_a_clk, PXO, 27000000);
 DEFINE_CLK_RPM_BRANCH(cxo_clk, cxo_a_clk, CXO, 19200000);
 
 static struct pll_vote_clk pll8_clk = {
@@ -2563,7 +2563,7 @@ static struct rcg_clk pixel_mdp_clk = {
 	.c = {
 		.dbg_name = "pixel_mdp_clk",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW, 85333000, NOMINAL, 170000000),
+		VDD_DIG_FMAX_MAP2(LOW, 76800000, NOMINAL, 170000000),
 		CLK_INIT(pixel_mdp_clk.c),
 	},
 };
@@ -3016,7 +3016,7 @@ static struct clk_freq_tbl clk_tbl_aif_osr[] = {
 		.c = { \
 			.dbg_name = #i "_clk", \
 			.ops = &clk_ops_rcg, \
-			VDD_DIG_FMAX_MAP1(LOW, 24576000), \
+			VDD_DIG_FMAX_MAP1(LOW, 27000000), \
 			CLK_INIT(i##_clk.c), \
 		}, \
 	}
