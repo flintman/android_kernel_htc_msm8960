@@ -403,7 +403,7 @@ inline static unsigned int validate_freq(struct cpufreq_policy *policy,
 static inline unsigned int get_timer_delay(void) {
 	unsigned int delay = usecs_to_jiffies(sampling_rate);
 
-	if (num_online_cpus() > 1)
+	if (num_online_cpus() > 1 && delay > 0)
 		delay -= jiffies % delay;
 	return delay;
 }
