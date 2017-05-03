@@ -16,6 +16,7 @@
 #include <linux/init.h>
 #include <linux/slab.h>
 #include <linux/platform_device.h>
+#include <linux/quickwakeup.h>
 #include <linux/of.h>
 #include <mach/mpm.h>
 #include "lpm_resources.h"
@@ -149,6 +150,7 @@ static struct msm_pm_sleep_ops msm_lpm_ops = {
 	.lowest_limits = msm_lpm_lowest_limits,
 	.enter_sleep = msm_lpm_enter_sleep,
 	.exit_sleep = msm_lpm_exit_sleep,
+	.sleep_again = quickwakeup_suspend_again,
 };
 
 static int __devinit msm_lpm_levels_probe(struct platform_device *pdev)
