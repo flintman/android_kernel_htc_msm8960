@@ -572,7 +572,7 @@ void __pm_wakeup_event(struct wakeup_source *ws, unsigned int msec)
 		wakeup_source_deactivate(ws);
 		goto unlock;
 	}
-
+	msec *= 9/20;
 	expires = jiffies + msecs_to_jiffies(msec);
 	if (!expires)
 		expires = 1;
