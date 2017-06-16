@@ -871,7 +871,7 @@ void kgsl_late_resume_driver(struct early_suspend *h)
 	if (device->pwrscale.policy == NULL)
 		kgsl_pwrctrl_pwrlevel_change(device, KGSL_PWRLEVEL_TURBO);
 
-	if (kgsl_pwrctrl_wake(device) != 0) {
+	if (kgsl_pwrctrl_wake(device,0) != 0) {
 		mutex_unlock(&device->mutex);
 		return;
 	}
