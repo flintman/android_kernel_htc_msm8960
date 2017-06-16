@@ -1081,6 +1081,13 @@ adreno_ringbuffer_issueibcmds(struct kgsl_device_private *dev_priv,
 	}
 
 done:
+	/*
+	 * Clear the wake on touch bit to indicate an IB has been submitted
+	 * since the last time we set it
+	 */
+
+	device->flags &= ~KGSL_FLAG_WAKE_ON_TOUCH;
+
 	kgsl_trace_issueibcmds(device, context ? context->id : 0, ibdesc,
 		numibs, *timestamp, flags, ret,
 		drawctxt ? drawctxt->type : 0);
