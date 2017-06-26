@@ -64,7 +64,7 @@ static struct asmp_param_struct {
 static unsigned int cycle = 0;
 static int enabled = 1;
 
-static void __cpuinit asmp_work_fn(struct work_struct *work) {
+static void asmp_work_fn(struct work_struct *work) {
 	unsigned int cpu = 0, slow_cpu = 0;
 	unsigned int rate, cpu0_rate, slow_rate = UINT_MAX, fast_rate;
 	int nr_cpu_online;
@@ -134,7 +134,7 @@ static void asmp_early_suspend(struct early_suspend *h) {
 	pr_info(ASMP_TAG"suspended\n");
 }
 
-static void __cpuinit asmp_late_resume(struct early_suspend *h) {
+static void asmp_late_resume(struct early_suspend *h) {
 	int cpu;
 
 	/* hotplug offline cpu cores */
@@ -157,7 +157,7 @@ static struct early_suspend __refdata asmp_early_suspend_handler = {
 	.resume = asmp_late_resume,
 };
 
-static int __cpuinit set_enabled(const char *val, const struct kernel_param *kp) {
+static int set_enabled(const char *val, const struct kernel_param *kp) {
 	int ret;
 	int cpu;
 
