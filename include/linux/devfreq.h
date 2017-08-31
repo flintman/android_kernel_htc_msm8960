@@ -164,6 +164,8 @@ struct devfreq {
 
 	unsigned long min_freq;
 	unsigned long max_freq;
+
+	bool do_wake_boost;
 };
 
 #if defined(CONFIG_PM_DEVFREQ)
