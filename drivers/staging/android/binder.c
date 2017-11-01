@@ -4132,6 +4132,7 @@ static int binder_proc_show(struct seq_file *m, void *unused)
 	int pid = (unsigned long)m->private;
 	struct hlist_node *pos;
 	int do_lock = !binder_debug_no_lock;
+	bool valid_proc = false;
 
 	if (do_lock)
 		binder_lock(__func__);
