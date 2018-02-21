@@ -89,18 +89,19 @@ static struct nsproxy *create_new_namespaces(unsigned long flags,
 		err = PTR_ERR(new_nsp->pid_ns);
 		goto out_pid;
 	}
-
+#ifdef CONFIG_NET_NS
 	new_nsp->net_ns = copy_net_ns(flags, task_cred_xxx(tsk, user_ns), tsk->nsproxy->net_ns);
 	if (IS_ERR(new_nsp->net_ns)) {
 		err = PTR_ERR(new_nsp->net_ns);
 		goto out_net;
 	}
-
+#endif
 	return new_nsp;
-
+#ifdef CONFIG_NET_NS
 out_net:
 	if (new_nsp->pid_ns)
 		put_pid_ns(new_nsp->pid_ns);
+#endif
 out_pid:
 	if (new_nsp->ipc_ns)
 		put_ipc_ns(new_nsp->ipc_ns);
