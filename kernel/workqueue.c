@@ -1132,7 +1132,7 @@ queue_work_on(int cpu, struct workqueue_struct *wq, struct work_struct *work)
 }
 EXPORT_SYMBOL_GPL(queue_work_on);
 
-static void delayed_work_timer_fn(unsigned long __data)
+static void _delayed_work_timer_fn(unsigned long __data)
 {
 	struct delayed_work *dwork = (struct delayed_work *)__data;
 	struct cpu_workqueue_struct *cwq = get_work_cwq(&dwork->work);
@@ -1202,7 +1202,7 @@ int queue_delayed_work_on(int cpu, struct workqueue_struct *wq,
 
 		timer->expires = jiffies + delay;
 		timer->data = (unsigned long)dwork;
-		timer->function = delayed_work_timer_fn;
+		timer->function = _delayed_work_timer_fn;
 
 		if (unlikely(cpu >= 0))
 			add_timer_on(timer, cpu);

@@ -552,7 +552,7 @@ static inline void debug_timer_assert_init(struct timer_list *timer)
 	debug_object_assert_init(timer, &timer_debug_descr);
 }
 
-static void __init_timer(struct timer_list *timer,
+static void _init_timer(struct timer_list *timer,
 			 const char *name,
 			 struct lock_class_key *key);
 
@@ -561,7 +561,7 @@ void init_timer_on_stack_key(struct timer_list *timer,
 			     struct lock_class_key *key)
 {
 	debug_object_init_on_stack(timer, &timer_debug_descr);
-	__init_timer(timer, name, key);
+	_init_timer(timer, name, key);
 }
 EXPORT_SYMBOL_GPL(init_timer_on_stack_key);
 
@@ -603,7 +603,7 @@ static inline void debug_assert_init(struct timer_list *timer)
 	debug_timer_assert_init(timer);
 }
 
-static void __init_timer(struct timer_list *timer,
+static void _init_timer(struct timer_list *timer,
 			 const char *name,
 			 struct lock_class_key *key)
 {
@@ -646,7 +646,7 @@ void init_timer_key(struct timer_list *timer,
 		    struct lock_class_key *key)
 {
 	debug_init(timer);
-	__init_timer(timer, name, key);
+	_init_timer(timer, name, key);
 }
 EXPORT_SYMBOL(init_timer_key);
 
